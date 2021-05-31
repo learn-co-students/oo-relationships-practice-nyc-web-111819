@@ -11,8 +11,12 @@ class Show
         @@all
     end
 
+    def episodes
+        Episode.all.select {|episode| episode.show == self}
+    end
+
     def characters
-        ShowCharacter.all.select { |sc| sc.show == self}
+        episodes.map {|ep| ep.characters}.uniq
     end
 
     def on_the_big_screen
